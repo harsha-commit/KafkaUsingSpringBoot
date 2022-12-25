@@ -1,4 +1,4 @@
-package com.learnkafka.domain;
+package com.learnkafka.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -13,11 +17,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Data
 @Builder
+@Entity
 public class Book {
-    @NotNull
+    @Id
     private Integer bookId;
-    @NotBlank
     private String bookName;
-    @NotBlank
     private String bookAuthor;
+    @OneToOne
+    @JoinColumn(name = "libraryEventId")
+    private LibraryEvent libraryEvent;
 }
